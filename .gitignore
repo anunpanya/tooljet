@@ -37,3 +37,4 @@
 
 .idea/*
 ti-*
+/postgres_data
