@@ -4,7 +4,7 @@ services:
   tooljet:
     build:
       context: ./
-      dockerfile: ./docker/plugins.Dockerfile.dev
+      dockerfile: ./docker/production.Dockerfile
     tty: true
     stdin_open: true
     container_name: Tooljet-app

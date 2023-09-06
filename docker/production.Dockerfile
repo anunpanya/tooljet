@@ -14,6 +14,7 @@ COPY ./package.json ./package.json
 # Build plugins
 COPY ./plugins/package.json ./plugins/package-lock.json ./plugins/
 RUN npm --prefix plugins install
+RUN npm --prefix plugins install --save redux
 COPY ./plugins/ ./plugins/
 RUN NODE_ENV=production npm --prefix plugins run build
 RUN npm --prefix plugins prune --production
@@ -21,6 +22,7 @@ RUN npm --prefix plugins prune --production
 # Build frontend
 COPY ./frontend/package.json ./frontend/package-lock.json ./frontend/
 RUN npm --prefix frontend install
+RUN npm --prefix frontend install --save redux
 COPY ./frontend/ ./frontend/
 RUN npm --prefix frontend run build --production
 RUN npm --prefix frontend prune --production
@@ -30,9 +32,12 @@ ENV NODE_ENV=production
 # Build server
 COPY ./server/package.json ./server/package-lock.json ./server/
 RUN npm --prefix server install
+RUN npm --prefix server install --save redux
 COPY ./server/ ./server/
 RUN npm install -g @nestjs/cli 
 RUN npm --prefix server run build
+
+RUN npm install --save redux
 
 FROM debian:11
 
